@@ -17,11 +17,15 @@ public class Util {
     private static String URL = "jdbc:mysql://localhost:3306/testdb";
     private static String USERNAME = "root";
     private static String PASSWORD = "root";
+    private static Connection connection;
+    
     private static SessionFactory sessionFactory;
 
     public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(URL, USERNAME, PASSWORD);
-    }
+        if (connection == null) {
+            connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+        }
+        return connection;
 
     public static SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
